@@ -16,7 +16,9 @@ if __name__ == "__main__":
         print("Employee ID must be an integer.")
         sys.exit(1)
 
-    url_user = "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
+    url_user = (
+        "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
+    )
     response_user = requests.get(url_user)
     user = response_user.json()
     employee_name = user.get("name")
