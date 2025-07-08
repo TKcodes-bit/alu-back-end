@@ -5,7 +5,7 @@ import requests
 import sys
 
 
-if __name__ == "__main__":
+def main():
     if len(sys.argv) != 2:
         print("Usage: ./0-gather_data_from_an_API.py <employee_id>")
         sys.exit(1)
@@ -17,18 +17,14 @@ if __name__ == "__main__":
         sys.exit(1)
 
     url_user = (
-        "https://jsonplaceholder.typicode.com/users/{}".format(
-            employee_id
-        )
+        f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     )
     response_user = requests.get(url_user)
     user = response_user.json()
     employee_name = user.get("name")
 
     url_todos = (
-        "https://jsonplaceholder.typicode.com/todos?userId={}".format(
-            employee_id
-        )
+        f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
     )
     response_todos = requests.get(url_todos)
     todos = response_todos.json()
@@ -38,10 +34,12 @@ if __name__ == "__main__":
     done_count = len(done_tasks)
 
     print(
-        "Employee {} is done with tasks({}/{}):".format(
-            employee_name, done_count, total_tasks
-        )
+        f"Employee {employee_name} is done with tasks({done_count}/{total_tasks}):"
     )
 
     for task in done_tasks:
-        print("\t {}".format(task.get("title")))
+        print(f"\t {task.get('title')}")
+
+
+if __name__ == "__main__":
+    main()
