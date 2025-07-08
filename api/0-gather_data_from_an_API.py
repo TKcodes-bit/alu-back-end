@@ -20,13 +20,15 @@ if __name__ == "__main__":
         "https://jsonplaceholder.typicode.com/users/{}".format(
             employee_id
         )
-    )  
+    )
     response_user = requests.get(url_user)
     user = response_user.json()
     employee_name = user.get("name")
 
     url_todos = (
-        "https://jsonplaceholder.typicode.com/todos?userId={}".format(employee_id)
+        "https://jsonplaceholder.typicode.com/todos?userId={}".format(
+            employee_id
+        )
     )
     response_todos = requests.get(url_todos)
     todos = response_todos.json()
