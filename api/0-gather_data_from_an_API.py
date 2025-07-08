@@ -6,6 +6,7 @@ import sys
 
 
 def main():
+    """Main function to fetch and display TODO progress."""
     if len(sys.argv) != 2:
         print("Usage: ./0-gather_data_from_an_API.py <employee_id>")
         sys.exit(1)
@@ -17,14 +18,18 @@ def main():
         sys.exit(1)
 
     url_user = (
-        f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+        "https://jsonplaceholder.typicode.com/users/{}".format(
+            employee_id
+        )
     )
     response_user = requests.get(url_user)
     user = response_user.json()
     employee_name = user.get("name")
 
     url_todos = (
-        f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
+        "https://jsonplaceholder.typicode.com/todos?userId={}".format(
+            employee_id
+        )
     )
     response_todos = requests.get(url_todos)
     todos = response_todos.json()
@@ -34,11 +39,13 @@ def main():
     done_count = len(done_tasks)
 
     print(
-        f"Employee {employee_name} is done with tasks({done_count}/{total_tasks}):"
+        "Employee {} is done with tasks({}/{}):".format(
+            employee_name, done_count, total_tasks
+        )
     )
 
     for task in done_tasks:
-        print(f"\t {task.get('title')}")
+        print("\t {}".format(task.get("title")))
 
 
 if __name__ == "__main__":
