@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""Fetches and displays TODO list progress for a given employee ID"""
+"""Fetches and displays TODO list progress for a given employee ID."""
 
 import requests
 import sys
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -18,10 +19,11 @@ if __name__ == "__main__":
     url_user = "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
     response_user = requests.get(url_user)
     user = response_user.json()
-
     employee_name = user.get("name")
 
-    url_todos = "https://jsonplaceholder.typicode.com/todos?userId={}".format(employee_id)
+    url_todos = (
+        "https://jsonplaceholder.typicode.com/todos?userId={}".format(employee_id)
+    )
     response_todos = requests.get(url_todos)
     todos = response_todos.json()
 
@@ -29,8 +31,11 @@ if __name__ == "__main__":
     total_tasks = len(todos)
     done_count = len(done_tasks)
 
-    print("Employee {} is done with tasks({}/{}):".format(
-        employee_name, done_count, total_tasks))
+    print(
+        "Employee {} is done with tasks({}/{}):".format(
+            employee_name, done_count, total_tasks
+        )
+    )
 
     for task in done_tasks:
         print("\t {}".format(task.get("title")))
